@@ -1,4 +1,5 @@
 # Script that gets data from an Api and saves it to MongoDB Atlas Database
+from datetime import datetime
 
 import requests
 import pymongo
@@ -31,6 +32,7 @@ if __name__ == '__main__':
     urls = ["https://www.hamburg-airport.de/service/flightdata/arrivals",
             "https://www.hamburg-airport.de/service/flightdata/departures"]
 
+    now = str(datetime.now()).split('.')[0].replace(' ', '_')
     for url in urls:
         flight_data = get_data(url)
-        save_data(flight_data, f"flights_{url.split('/')[-1]}")
+        save_data(flight_data, f"{now}_flights_{url.split('/')[-1]}")
